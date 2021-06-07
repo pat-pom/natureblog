@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/pat-pom/natureblog/issues"
   },
-  "homepage": "https://github.com/pat-pom/natureblog#readme"
+  "homepage": "https://github.com/pat-pom/natureblog#readme",
+  "dependencies": {
+    "tailwindcss": "^2.1.4"
+  }
 }
