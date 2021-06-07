@@ -1,0 +1,19 @@
+{
+  "name": "projekt-bazy",
+  "version": "1.0.0",
+  "description": "Blog dla pasjonatow natury",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pat-pom/natureblog.git"
+  },
+  "author": "kwieczorek, ppomierski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pat-pom/natureblog/issues"
+  },
+  "homepage": "https://github.com/pat-pom/natureblog#readme"
+}
