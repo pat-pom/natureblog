@@ -1,5 +1,38 @@
-const http = require('http');
+//const http = require('http');
+const express = require('express');
+const app = express();
 
+const mongoose = require('mongoose');
+
+
+//importuje routes
+const authRoute = require('./routes/auth');
+const postRoute = require('./routes/posts');
+
+
+//*************************************** 
+//dotenv.config();                      * nie dziala
+//const dotenv = require('dotenv');     *
+//*************************************** 
+
+//DB connection
+mongoose.connect('mongodb+srv://paka9:paka9@cluster0.5nwo2.mongodb.net/Cluster0?retryWrites=true&w=majority', 
+{ useNewUrlParser: true }, 
+() => console.log('Baza polaczona'));
+
+
+
+app.use(express.json());
+
+
+app.use('/api/user', authRoute);
+app.use('/api/posts', postRoute);
+
+
+app.listen(3000, () => console.log('OK'));
+
+
+/*
 const hostname = '127.0.0.1';
 const port = 3000;
 
@@ -11,4 +44,4 @@ const server = http.createServer(function(req, res) {
 
 server.listen(port, hostname, function() {
   console.log('Server running at http://'+ hostname + ':' + port + '/');
-});
+});*/
