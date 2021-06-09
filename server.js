@@ -40,6 +40,10 @@ app.get('/register', (req, res) => {
     res.render('sign-up');
 });
 
+app.get('/gallery', (req, res) => {
+    res.render('gallery');
+});
+
 
 //DB connection
 mongoose.connect('mongodb+srv://paka9:paka9@cluster0.5nwo2.mongodb.net/Cluster0?retryWrites=true&w=majority', 
