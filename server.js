@@ -45,6 +45,10 @@ app.get('/gallery', (req, res) => {
     res.render('gallery');
 });
 
+app.get('/blog', (req, res) => {
+    res.render('blog');
+});
+
 
 //DB connection
 mongoose.connect('mongodb+srv://paka9:paka9@cluster0.5nwo2.mongodb.net/Cluster0?retryWrites=true&w=majority', 
