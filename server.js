@@ -32,6 +32,14 @@ app.get('', (req, res) => {
     res.render('index');
 });
 
+app.get('/login', (req, res) => {
+    res.render('sign-in');
+});
+
+app.get('/register', (req, res) => {
+    res.render('sign-up');
+});
+
 
 //DB connection
 mongoose.connect('mongodb+srv://paka9:paka9@cluster0.5nwo2.mongodb.net/Cluster0?retryWrites=true&w=majority', 
