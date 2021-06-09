@@ -15,6 +15,14 @@ const postRoute = require('./routes/posts');
 //const dotenv = require('dotenv');     *
 //*************************************** 
 
+//Static files
+
+app.use(express.static('public'));
+
+app.use('/css',express.static(__dirname + 'public/css'));
+app.use('/img',express.static(__dirname + 'public/img'));
+app.use('/js',express.static(__dirname + 'public/js'));
+
 //DB connection
 mongoose.connect('mongodb+srv://paka9:paka9@cluster0.5nwo2.mongodb.net/Cluster0?retryWrites=true&w=majority', 
 { useNewUrlParser: true }, 
