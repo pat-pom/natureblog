@@ -23,6 +23,16 @@ app.use('/css',express.static(__dirname + 'public/css'));
 app.use('/img',express.static(__dirname + 'public/img'));
 app.use('/js',express.static(__dirname + 'public/js'));
 
+//Set views
+
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+app.get('', (res, req) =>{
+    res.render('index');
+});
+
+
 //DB connection
 mongoose.connect('mongodb+srv://paka9:paka9@cluster0.5nwo2.mongodb.net/Cluster0?retryWrites=true&w=majority', 
 { useNewUrlParser: true }, 
