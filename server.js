@@ -10,10 +10,10 @@ const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 
 
-//*************************************** 
-//dotenv.config();                      * nie dziala
-//const dotenv = require('dotenv');     *
-//*************************************** 
+const dotenv = require('dotenv');  
+dotenv.config();                      
+   
+
 
 //Static files
 
@@ -51,7 +51,7 @@ app.get('/blog', (req, res) => {
 
 
 //DB connection
-mongoose.connect('mongodb+srv://paka9:paka9@cluster0.5nwo2.mongodb.net/Cluster0?retryWrites=true&w=majority', 
+mongoose.connect(process.env.MONGO, 
 { useNewUrlParser: true }, 
 () => console.log('Baza polaczona'));
 
