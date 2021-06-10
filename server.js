@@ -20,9 +20,9 @@ dotenv.config();
 
 app.use(express.static('public'));
 app.use(session({secret: '123#345'}));
-app.use('/css',express.static(__dirname + 'public/css'));
-app.use('/img',express.static(__dirname + 'public/img'));
-app.use('/js',express.static(__dirname + 'public/js'));
+// app.use('/css',express.static(__dirname + 'public/css'));
+// app.use('/img',express.static(__dirname + 'public/img'));
+// app.use('/js',express.static(__dirname + 'public/js'));
 
 //Set views
 
@@ -73,6 +73,11 @@ app.get('/gallery', checkSignIn, (req, res) => {
 //Blog page
 app.get('/blog', checkSignIn, (req, res) => {
     res.render('blog');
+});
+
+//Add post page
+app.get('/add', checkSignIn, (req, res) => {
+    res.render('form-post');
 });
 
 //Lcogout page
