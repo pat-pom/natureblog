@@ -40,7 +40,7 @@ router.post('/register', async (req,res) => {
         const savedUser = await user.save();
         //res.send({user: user._id});
         //res.redirect(301, `/`)
-        res.redirect(301, `/login`)
+        res.redirect(301, `/`)
 
     }catch(err){
         res.status(400).send(err);
