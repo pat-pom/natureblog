@@ -69,7 +69,7 @@ app.get('/blog', checkSignIn, (req, res) => {
     res.render('blog');
 });
 
-//Logout page
+//Lcogout page
 app.get('/logout', function(req, res){
     req.session.destroy(function(){
        console.log("user logged out.")
