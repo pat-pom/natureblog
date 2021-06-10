@@ -41,6 +41,12 @@ const checkSignIn = (req, res, next) => {
     }
 }
 
+//======================================= DB connection ========================================================================
+
+mongoose.connect(process.env.MONGO, 
+    { useNewUrlParser: true }, 
+    () => console.log('Baza polaczona'));
+
 //======================================= GET Routes ========================================================================
 
 
@@ -78,11 +84,7 @@ app.get('/logout', function(req, res){
  });
 
 
-//======================================= DB connection ========================================================================
 
-mongoose.connect(process.env.MONGO, 
-{ useNewUrlParser: true }, 
-() => console.log('Baza polaczona'));
 
 
 
