@@ -1,6 +1,7 @@
 //const http = require('http');
 const express = require('express');
 const app = express();
+const session = require('express-session');
 
 const mongoose = require('mongoose');
 
@@ -18,7 +19,7 @@ dotenv.config();
 //Static files
 
 app.use(express.static('public'));
-
+app.use(session({secret: '123#345'}));
 app.use('/css',express.static(__dirname + 'public/css'));
 app.use('/img',express.static(__dirname + 'public/img'));
 app.use('/js',express.static(__dirname + 'public/js'));
@@ -29,9 +30,22 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 
-app.get('', (req, res) => {
+
+const checkSignIn = (req, res, next) => {
+    if(req.session.token){
+        next();     //If session exists, proceed to page
+    } else {
+        res.redirect(301, `/login`)
+        //var err = new Error("Not logged in!");
+        //next(err);  //Error, trying to access unauthorized page!
+    }
+}
+
+app.get('', checkSignIn, (req, res) => {
     res.render('index');
 });
+
+
 
 app.get('/login', (req, res) => {
     res.render('sign-in');
@@ -41,13 +55,21 @@ app.get('/register', (req, res) => {
     res.render('sign-up');
 });
 
-app.get('/gallery', (req, res) => {
+app.get('/gallery', checkSignIn, (req, res) => {
     res.render('gallery');
 });
 
-app.get('/blog', (req, res) => {
+app.get('/blog', checkSignIn, (req, res) => {
     res.render('blog');
 });
+
+app.get('/logout', function(req, res){
+    req.session.destroy(function(){
+       console.log("user logged out.")
+    });
+    res.redirect(301, '/login');
+ });
+
 
 
 //DB connection

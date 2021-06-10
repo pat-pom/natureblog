@@ -39,7 +39,9 @@ router.post('/register', async (req,res) => {
     try{
         const savedUser = await user.save();
         //res.send({user: user._id});
-        res.redirect(301, `/`)
+        //res.redirect(301, `/`)
+        res.redirect(301, `/login`)
+
     }catch(err){
         res.status(400).send(err);
     }
@@ -58,10 +60,15 @@ router.post('/login', async (req,res) => {
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if(!validPass) return res.status(400).send('Password is incorrect');
 
+    
+
     //creating and assigning token
     const token = jwt.sign({_id: user._id}, '123#345')
-    res.header('auth-token', token).send(token);
-
+    //res.header('auth-token', token);
+    req.session.token = token;
+    // tu dodane
+    res.redirect(301, `/`)
+    
     //res.send('Zalogowano');
 });
 

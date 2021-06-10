@@ -37,6 +37,10 @@
                     <div class="ml-4 flex items-center md:ml-6">
                     </div>
                 </div>
+
+                <!--.then(res => res.redirected && ( location.href = res.url ))-->
+                <button onclick="fetch('http://localhost:3000/logout', { redirect: 'follow'}).then(res => res.redirected && ( location.href = res.url ))"> Logout </button>
+
                 <div class="-mr-2 flex md:hidden">
                     <button
                         class="text-gray-800 dark:text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none">
