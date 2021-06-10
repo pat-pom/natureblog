@@ -41,28 +41,35 @@ const checkSignIn = (req, res, next) => {
     }
 }
 
+//======================================= GET Routes ========================================================================
+
+
+//Default
 app.get('', checkSignIn, (req, res) => {
     res.render('index');
 });
 
-
-
+//Login page
 app.get('/login', (req, res) => {
     res.render('sign-in');
 });
 
+//Register page
 app.get('/register', (req, res) => {
     res.render('sign-up');
 });
 
+//Gallery page
 app.get('/gallery', checkSignIn, (req, res) => {
     res.render('gallery');
 });
 
+//Blog page
 app.get('/blog', checkSignIn, (req, res) => {
     res.render('blog');
 });
 
+//Logout page
 app.get('/logout', function(req, res){
     req.session.destroy(function(){
        console.log("user logged out.")
@@ -71,8 +78,8 @@ app.get('/logout', function(req, res){
  });
 
 
+//======================================= DB connection ========================================================================
 
-//DB connection
 mongoose.connect(process.env.MONGO, 
 { useNewUrlParser: true }, 
 () => console.log('Baza polaczona'));
