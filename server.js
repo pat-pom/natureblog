@@ -76,7 +76,7 @@ app.get('/blog', checkSignIn, (req, res) => {
 });
 
 //Add post page
-app.get('/add', checkSignIn, (req, res) => {
+app.get('/add',  (req, res) => {
     res.render('form-post');
 });
 
