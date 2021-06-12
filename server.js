@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const session = require('express-session');
+const Post = require('./model/Post');
 
 const mongoose = require('mongoose');
 
@@ -17,7 +18,7 @@ dotenv.config();
 
 
 //Static files
-
+app.use(express.json());
 app.use(express.static('public'));
 app.use(session({secret: '123#345'}));
 // app.use('/css',express.static(__dirname + 'public/css'));
@@ -80,6 +81,7 @@ app.get('/add',  (req, res) => {
     res.render('form-post');
 });
 
+
 //Lcogout page
 app.get('/logout', function(req, res){
     req.session.destroy(function(){
@@ -89,7 +91,24 @@ app.get('/logout', function(req, res){
  });
 
 
+ //posting an article
+ app.post('/add', async (req, res) => {
+    console.log(req);
+    //Creating new post
+    const newpost = new Post({
+    title: req.body.title,
+    post: req.body.post
+    });
 
+    try{
+    const savedPost = await newpost.save();
+    res.redirect(301, `/blog`)
+
+    }catch(err){
+    res.status(400).send(err);
+    }
+
+});
 
 
 

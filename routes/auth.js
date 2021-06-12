@@ -67,7 +67,7 @@ router.post('/login', async (req,res) => {
     //res.header('auth-token', token);
     req.session.token = token;
     // tu dodane
-    res.redirect(301, `/`)
+    res.redirect(301, `/`) 
     //res.send('Zalogowano');
 });
 

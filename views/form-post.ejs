@@ -20,16 +20,43 @@
             </label>
           </div>
           <div class="md:w-2/3">
-            <textarea class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"></textarea>
+            <textarea id="post" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"></textarea>
           </div>
         </div>
         <div class="md:flex md:items-center">
           <div class="md:w-1/3"></div>
           <div class="md:w-2/3">
-            <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+            <button id="addpost" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
               Add post
             </button>
           </div>
         </div>
       </form>
+
+
+      <script>
+        document.getElementById("addpost").addEventListener('click', async () => {
+          const title = document.getElementById('inline-full-name').value;
+          const post = document.getElementById('post').value;
+          
+          fetch('http://localhost:3000/add', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              title,
+              post
+            }),
+            redirect: 'follow'
+          })
+            .then(res => {
+              res.redirected && ( location.href = res.url )
+              return res.json()
+            });
+        })
+      </script>
+
+
+
 <%- include('footer.ejs') %>
