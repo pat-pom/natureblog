@@ -39,7 +39,7 @@
           const title = document.getElementById('inline-full-name').value;
           const post = document.getElementById('post').value;
           
-          fetch('http://localhost:3000/add', {
+          fetch('http://localhost:3000/api/user/add', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

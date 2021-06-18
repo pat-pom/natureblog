@@ -1,27 +1,20 @@
-const Joi = require('@hapi/joi');
-
 const registerValidation = (data) => {
-    const schema = Joi.object({
-        //name: Joi.string().min(6).required(),
-        email: Joi.string().min(6).required().email(),
-        password: Joi.string().min(6).required()
-    });
+    if (data.email.length < 6) {
+        return { message: 'email too short' };
+    }
 
-    return schema.validate(data);
+    if (data.password.length < 6) {
+        return { message: 'password too short' };
+    }
 }
 
 const loginValidation = (data) => {
-    const schema = Joi.object({
-        email: Joi.string().min(6).required().email(),
-        password: Joi.string().min(6).required()
-    });
-
-    return schema.validate(data);
+    if (data.email.length < 6) {
+        return { message: 'email too short' };
+    }
 }
 
-
-
-
-
-module.exports.registerValidation = registerValidation;
-module.exports.loginValidation = loginValidation;
+module.exports = {
+    registerValidation,
+    loginValidation
+}
