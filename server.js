@@ -61,7 +61,7 @@ app.get('/blog', (req, res) => {
         
         const db = client.db(process.env.DB_NAME)
         const posts = db.collection('posts').find().toArray((err, posts) => {
-            console.log(posts);
+            //console.log(posts);
             res.render('blog', {posts});
         })
         
