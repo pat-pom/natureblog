@@ -38,7 +38,7 @@ const checkSignIn = (req, res, next) => {
     }
 }
 
-app.get('', checkSignIn, (req, res) => {
+app.get('', (req, res) => {
     res.render('index');
 });
 
@@ -50,12 +50,38 @@ app.get('/register', (req, res) => {
     res.render('sign-up');
 });
 
-app.get('/gallery', checkSignIn, (req, res) => {
+app.get('/gallery', (req, res) => {
     res.render('gallery');
 });
 
+app.get('/search', (req, res) => {
+    var searchTerm = req.query.searchterm;
+    //console.log(searchTerm);
+    MongoClient.connect(process.env.MONGO, {}, async (error, client) => {
+        
+        const db = client.db(process.env.DB_NAME)
+        const posts = db.collection('posts').find(
+
+            {"title": searchTerm}
+ /*           {
+                position:
+                  { $near:
+                     {
+                       $geometry: { type: "Point",  coordinates: [ 16.58, 52.25 ] },
+                       $minDistance: 1000,
+                       $maxDistance: 50000
+                     }
+                  }
+              }*/
+
+        ).toArray((err, posts) => {
+            //console.log(posts);
+            res.render('search', {posts});
+        })
+    })
+});
+
 app.get('/blog', (req, res) => {
-    
 
     MongoClient.connect(process.env.MONGO, {}, async (error, client) => {
         
@@ -64,10 +90,7 @@ app.get('/blog', (req, res) => {
             //console.log(posts);
             res.render('blog', {posts});
         })
-        
-
     })
-    
 });
 
 app.get('/add',  (req, res) => {

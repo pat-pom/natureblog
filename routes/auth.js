@@ -72,7 +72,7 @@ router.post('/login', async (req,res) => {
 
 //adding new post
 router.post('/add', async (req,res) => {
-    const { title, post } = req.body;
+    const { title, post, lat, lng } = req.body;
 
     MongoClient.connect(process.env.MONGO, {}, async (error, client) => {
         if (error) {
@@ -81,10 +81,19 @@ router.post('/add', async (req,res) => {
         const db = client.db(process.env.DB_NAME)
         const posts = db.collection('posts');
 
+
         posts.insertOne({
             title,
-            post
+            post,
+            position: {
+              type: "Point",
+              coordinates: [
+                lat,
+                lng
+              ]
+            }
         })
+        posts.createIndex( { coordinates: "2dsphere" } )
         res.redirect(301, `/blog`);
 
       })
